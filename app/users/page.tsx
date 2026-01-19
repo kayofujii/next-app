@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface User {
     id: number;
     name: string;
@@ -7,16 +5,27 @@ interface User {
 }
 
 const UsersPage = async () => {
-const users: User[] = await fetch("https://jsonplaceholder.typicode.com/users", { next: { revalidate: 10 } }).then(res => res.json());
+const users: User[] = await fetch("https://jsonplaceholder.typicode.com/users", { cache: 'no-store' }).then(res => res.json());
 
   return (
     <div>
-        {users.map((user: User) => (
-            <div key={user.id}>
-                <h2>{user.name}</h2>
-                <p>{user.email}</p>
-            </div>
-        ))}
+      <h1>Users</h1>
+      <p>{new Date().toLocaleTimeString()}</p>
+        <table className='table table-zebra border'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user: User) => (
+            <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+            </tr>
+        ))}</tbody>
+        </table>
     </div>
   )
 }

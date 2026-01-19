@@ -4,7 +4,7 @@ import AddToCart from './AddToCart'
 
 const ProductCard = () => {
   return (
-    <div><AddToCart /></div>
+    <div className='btn btn-soft btn-primary'><AddToCart /></div>
   )
 }
 
